@@ -1,7 +1,9 @@
-/* this index.css will use in main.jsx and apply all component  */
+@import "tailwindcss";
+
 
 *{
-    margin: 0px;
-    padding: 0px;
+    /* margin: 0px; */
+    /* padding: 0px; */
     box-sizing: border-box;
 }
+
