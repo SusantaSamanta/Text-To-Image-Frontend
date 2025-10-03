@@ -10,13 +10,14 @@ import Navbar from './components/Navbar';
 const App = () => {
   return (
     <>
-      <div className='px-4 lg:px-32 border-1 min-h-screen bg-gradient-to-b from-cyan-50 to-blue-100'>
+      <div className='border-0 h-auto '>  {/*min-h-screen px-4 lg:px-32  give for each */}
         <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/generate' element={<Generate />}/>
           <Route path='/bye' element={<ByeCredit />}/>
         </Routes>
+        {/* <footer></footer> */}
       </div>
     </>
   )

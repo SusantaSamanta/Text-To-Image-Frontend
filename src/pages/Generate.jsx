@@ -1,10 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { IoSend } from "react-icons/io5";
 
 const Generate = () => {
   return (
-    <div>
-        <h1>Image Generate Page</h1>
-    </div>
+    <>
+      Generate Images with Ai
+    </>
   )
 }
 
