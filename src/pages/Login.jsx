@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AppContext } from '../context/AppContext';
+import { IoMdClose } from 'react-icons/io';
 
 const Login = () => {
+
+    const { setShowLoginPage, signupOrLogin, setSignupOrLogin } = useContext(AppContext);
+    // console.log(signupOrLogin, 'jfhgbkdjfhg');
+
+
+
     return (
         <>
-            <div className='h-full w-full absolute left-0 top-0 z-[11] backdrop-blur-[3px]'>
-                Login page
-            </div>
+           
         </>
     )
 }
