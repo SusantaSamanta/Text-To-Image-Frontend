@@ -56,54 +56,29 @@ const Generate = () => {
     console.log(userChatRef.current);
 
   }, [])
-
-
-
-
-
-
-  return (
-    <>
-      <div className='h-auto lg:pt-18 border-0 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat bg-cover relative z-0'>
-        <div className='lg:h-full w-full bg-gradient-to-b from-white to-[#ffffff1f] absolute top-0 left-0 z-[1]'></div>
-        <div className='h-[calc(100vh-73px)] flex justify-center items-start relative z-[2]'>
-          <div className='h-full w-[55%] flex justify-center items-start'>
-            <section className='h-full w-full relative border-0 flex flex-col justify-between'>
-              <div style={{ scrollbarWidth: 'none' }} className='h-full lg:px-[2%] border-0 overflow-y-scroll scrollbar-hide text-justify '>
-                <div className="flex flex-col justify-end items-end gap-y-4" ref={userChatRef}>
-                  {
-                    userChatContent.map((item, i) => {
-                      return (
-                        // <div className='w-full my-2 border-0'>
-                        <div className='w-full flex flex-col items-end border-0'>
-                          <div className='w-full'>
-                            <img src={item.imageUrl} alt="user" className="w-50 rounded-xl" />
-                          </div>
-                          <div className="max-w-[70%] mt-4 px-4 py-2 bg-gradient-to-r from-[rgb(57,94,255)] via-[rgba(255,96,123,0.8)] to-[#ffb120] rounded-lg rounded-br-none text-white font-semibold">
-                            {item.prompt}
-                          </div>
-                        </div>
-                      )
-
-                    })
-                  }
-                </div>
-              </div>
-
-
-              
-            </section>
-          </div>
-        </div>
-      </div>
-    </>
-  )
 }
 
-export default Generate
 
+//////  How to implement Protected routes /////
 
+S1 : Create a component called ProtectedRoute
+      export ProtectedRoute (props) {
+        get value of isUserLogin 
+        return(
+          isUserLogin? props.children : <Navigate to={'/login'} /> ///mean if user login then render chider or redetect to login
+        )                                                             /// we can get children from App.js >> Routes >> Route >> element={<ProtectedRoute><Generate/></ProtectedRoute>}                          
+      }                                                                   /// where <Generate/> component send as a props from App.js
 
+S2 :    <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/generate' element={
+            <ProtectRoute>
+              <Generate />     /// this will go to <ProtectedRoute> As a props.children  </ProtectedRoute>
+            </ProtectRoute>
+          } />
+        </Routes>
+
+////            In our case we can set the value of showLoginPage = true && redirect to Home page (Because it make loop : accessing generate page again and again);
 
 
 

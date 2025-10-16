@@ -5,11 +5,10 @@ import { IoMdClose } from 'react-icons/io';
 
 const ByeCredit = () => {
 
-  console.log(pricePlainDataArr);
 
   const { setShowByePage } = useContext(AppContext);
 
-  useEffect(() => {
+  useEffect(() => { // use for block scroll of the page of when bayCredit is open 
     document.body.style.overflow = 'hidden';
     return () =>{ 
       document.body.style.overflow = 'unset';
@@ -19,7 +18,7 @@ const ByeCredit = () => {
 
   return (
     <>
-      <div className='h-screen w-full absolute left-0 top-0 z-[11] backdrop-blur-[2px] bg-[#0000008b]
+      <div className='h-screen w-full fixed left-0 top-0 z-[11] backdrop-blur-[2px] bg-[#0000008b]
       flex justify-center items-center'>
         <div className='lg:w-[800px] lg:p-[4%] bg-[#ffffffed] relative flex flex-col justify-start items-center rounded-3xl'>
           <button
