@@ -1,22 +1,53 @@
-import { createContext, useState } from "react";
+
+import { checkUserLogin } from '../utils/auth'
+import { createContext, useState, useEffect } from "react";
+
+
 export const AppContext = createContext();
 const AppContextProvider = (props) => {  // receive <App/> from main.jsx as props.children 
     const [isLogin, setIsLogin] = useState(false); // user for show event on user login or notLogin
     const [showByePage, setShowByePage] = useState(false); // show bye page or not 
     const [showLoginPage, setShowLoginPage] = useState(false);
-    const [ signupOrLogin, setSignupOrLogin] = useState('Sign Up');
+    const [signupOrLogin, setSignupOrLogin] = useState('Login');
+    const [userDetailFromBackend, setUserDetailFromBackend] = useState(null);
     
-    
+    const getFirstName = (fullName) => { // from full name give the first name in first letter capital 
+        if (!fullName) return ""; // Handle empty or undefined names
+        const firstName = fullName.split(" ")[0]; // Get the first part (first name)
+        return firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+    };
+
     const sendVariables = {
-        isLogin,  setIsLogin,
+        isLogin, setIsLogin,
         showByePage, setShowByePage,
         showLoginPage, setShowLoginPage,
         signupOrLogin, setSignupOrLogin,
+        userDetailFromBackend, setUserDetailFromBackend,
+        getFirstName,
     }
+
+
+    useEffect(() => {
+        const callCheckUserLogin = async () => {
+            const result = await checkUserLogin();
+            if (result.success) {
+                setIsLogin(true);
+                setShowLoginPage(false);
+                setUserDetailFromBackend(result.user);
+            } else {
+                setIsLogin(false);
+                setUserDetailFromBackend(null);
+            }
+        };
+        callCheckUserLogin();
+    }, []);
+
+
+
+
     return (
         <AppContext.Provider value={sendVariables}>
             {props.children}
-            {/* {console.log(props)} */}
         </AppContext.Provider>
     )
 }

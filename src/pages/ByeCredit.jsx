@@ -6,11 +6,11 @@ import { IoMdClose } from 'react-icons/io';
 const ByeCredit = () => {
 
 
-  const { setShowByePage } = useContext(AppContext);
+  const { setShowByePage, userDetailFromBackend } = useContext(AppContext);
 
   useEffect(() => { // use for block scroll of the page of when bayCredit is open 
     document.body.style.overflow = 'hidden';
-    return () =>{ 
+    return () => {
       document.body.style.overflow = 'unset';
     }
   }, []);
@@ -26,7 +26,13 @@ const ByeCredit = () => {
             className='bg-white lg:text-xl lg:p-1  rounded-full md:shadow-[2px_2px_8px_#4a4a4a72] text-black absolute top-4 right-4 cursor-pointer'><IoMdClose />
           </button>
           <div className='w-full lg:mb-15 border-0'>
-            <span className='px-3 lg:px-6 py-2 bg-blue-400 hover:bg-blue-500 md:shadow-[4px_4px_6px_#4a4a4a72] text-white md:text-xl font-semibold  rounded-2xl'>Your Credits : 10</span>
+            <span className='px-3 lg:px-6 py-2 bg-blue-400 hover:bg-blue-500 md:shadow-[4px_4px_6px_#4a4a4a72] text-white md:text-xl font-semibold  rounded-2xl'>Your Credits :
+              {
+                (userDetailFromBackend &&
+                  ` ${userDetailFromBackend.credits}`
+                )
+              }
+            </span>
           </div>
           <div className='font-semibold lg:text-2xl lg:mb-15'>
             Close Our Plains
@@ -35,7 +41,7 @@ const ByeCredit = () => {
             {
               pricePlainDataArr.map((item, i) => {
                 return (
-                  <div className='border-0 lg:p-5 shadow-[2px_2px_8px_#dadadae1] bg-white rounded-xl hover:scale-[1.02] duration-300 ease-in-out'>
+                  <div className='border-0 lg:p-5 shadow-[2px_2px_8px_#dadadae1] bg-white rounded-xl hover:scale-[1.01] duration-100 ease-in-out'>
                     {item.type}
                     <p className='text-[12px] mb-2'>{item.for}</p>
                     <p className='text-[12px]'><span className='lg:mr-1 font-semibold lg:text-xl'>{item.price}</span>{item.credit}</p>

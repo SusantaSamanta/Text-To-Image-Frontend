@@ -27,12 +27,7 @@ const Generate = () => {
 
   const userChatRef = useRef(null);
 
-  // useEffect(() => {
-  //   userChatRef.current?.scrollTo({
-  //     top: userChatRef.current.scrollHeight,
-  //     behavior: 'auto',
-  //   });
-  // }, []);
+
   useEffect(() => {
     userChatRef.current?.scrollTo({
       top: userChatRef.current.scrollHeight,

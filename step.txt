@@ -64,6 +64,12 @@ const Generate = () => {
 S1 : Create a component called ProtectedRoute
       export ProtectedRoute (props) {
         get value of isUserLogin 
+        useEffect(() => { 
+        if(!isLogin){
+          setShowLoginPage(true); // in our case this will require to show login page
+          alert('login require');
+        }
+        }, [])
         return(
           isUserLogin? props.children : <Navigate to={'/login'} /> ///mean if user login then render chider or redetect to login
         )                                                             /// we can get children from App.js >> Routes >> Route >> element={<ProtectedRoute><Generate/></ProtectedRoute>}                          
@@ -82,12 +88,42 @@ S2 :    <Routes>
 
 
 
+///////// ⭐⭐⭐    To connect backend we do this ⭐⭐⭐  /////////
+
+S1:  in main.jsx : 
+         import axios from 'axios';
+         axios.defaults.withCredentials = true;
+         axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL  // in .env set variable name start with VITE_
+     now you can fetch like '/api/login/name  
+  in backend :---
+  app.use(cors(
+    {
+        origin: process.env.FRONTEND_URL,
+        exposedHeaders: ['X-Total-Count'],
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+        credentials: true,
+    }
+  ));  // use for connect frontend and backend
 
 
 
 
-
-
+///////////    toast notification in react .////////////
+S1: npm i react-toastify
+S2:  in App.jx :  import { ToastContainer, toast } from 'react-toastify';
+S3:  return (    /// Inside App component 
+        <>
+          <div className='border-0 h-auto '>
+            <ToastContainer position='bottom-right'/>  // before navbar
+            <Navbar/>
+        </>
+      )
+S4: to use notification : on any file 
+    import { toast } from 'react-toastify';
+      inside on component : 
+        toast.success(data.message) ,
+        toast.error(data.message) ,
+    
 
 
 

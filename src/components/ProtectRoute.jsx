@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectRoute = (props) => {
     const { isLogin, setShowLoginPage } = useContext(AppContext);
-    useEffect(() => { 
+    useEffect(() => {  
       if(!isLogin){
         setShowLoginPage(true);
         alert('login require');
