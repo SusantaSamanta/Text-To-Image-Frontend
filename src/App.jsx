@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import { AppContext } from './context/AppContext';
 import ProtectRoute from './components/ProtectRoute';
+import Community from './pages/Community';
 
 const App = () => {
   const { showByePage, showLoginPage } = useContext(AppContext)
@@ -37,6 +38,7 @@ const App = () => {
 
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/community' element={<Community />} />
           <Route path='/generate' element={
             <ProtectRoute>
               <Generate />

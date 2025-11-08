@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom';
 
 const HomeHeader = () => {
     return (
@@ -17,7 +18,7 @@ const HomeHeader = () => {
                 <h1 className='lg:w-[800px] text-center text-xl '>
                     Transform your ideas into artistic masterpieces using the power of Al. Describe your vision with text, and see it rendered in stunning detail.
                 </h1>
-                <motionLink to={'/generate'}>
+                <Link to={'/generate'}>
                     <button
                         className="px-6 py-3 bg-gradient-to-r from-[#5662d3] via-pink-500 to-orange-300 text-white 
                         text-base lg:text-xl font-bold rounded-2xl lg:shadow-[5px_5px_10px_#4a4a4a72] hover:bg-blue-700 
@@ -25,7 +26,7 @@ const HomeHeader = () => {
                         Generate Image
                         <img className='lg:w-[30px] border-0 inline' src='../src/assets/ai_star.png' />
                     </button>
-                </motionLink>
+                </Link>
             </motion.section>
 
 

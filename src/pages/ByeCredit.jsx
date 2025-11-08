@@ -41,7 +41,7 @@ const ByeCredit = () => {
             {
               pricePlainDataArr.map((item, i) => {
                 return (
-                  <div className='border-0 lg:p-5 shadow-[2px_2px_8px_#dadadae1] bg-white rounded-xl hover:scale-[1.01] duration-100 ease-in-out'>
+                  <div className='border-0 lg:p-5 shadow-[2px_2px_8px_#dadadae1] bg-white rounded-xl hover:shadow-[4px_4px_10px_4px_#dadadae1] duration-100 ease-in-out'>
                     {item.type}
                     <p className='text-[12px] mb-2'>{item.for}</p>
                     <p className='text-[12px]'><span className='lg:mr-1 font-semibold lg:text-xl'>{item.price}</span>{item.credit}</p>

@@ -1,0 +1,24 @@
+<svg width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#bababacb; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b5b5b5cb; stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <defs>
+    
+  </defs>
+
+  <circle cx="20" cy="25" r="8" fill="url(#grad)">
+    <animate attributeName="cy" values="25;10;25" dur="0.8s" repeatCount="indefinite" begin="0s"/>
+  </circle>
+  <circle cx="50" cy="25" r="8" fill="url(#grad)">
+    <animate attributeName="cy" values="25;10;25" dur="0.8s" repeatCount="indefinite" begin="0.1s"/>
+  </circle>
+  <circle cx="80" cy="25" r="8" fill="url(#grad)">
+    <animate attributeName="cy" values="25;10;25" dur="0.8s" repeatCount="indefinite" begin="0.2s"/>
+  </circle>
+  <circle cx="110" cy="25" r="8" fill="url(#grad)">
+    <animate attributeName="cy" values="25;10;25" dur="0.8s" repeatCount="indefinite" begin="0.3s"/>
+  </circle>
+</svg>

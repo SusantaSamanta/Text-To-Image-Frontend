@@ -47,12 +47,15 @@ const Login = () => {
             );
 
             if (response.data.success) {
-                console.log(response.data.user);
+                console.log('reg :', response.data.user);
                 setIsLogin(true);
                 setShowLoginPage(false);
                 setUserDetailFromBackend(response.data.user);
                 // alert(`Register Response: ${response.data.message}`);
                 toast.success(response.data.message);
+                setTimeout(() => {
+                    toast.success(`Welcome ${getFirstName(response.data.user.name)}, you are logged in`);
+                }, 1000);
                 navigate('/');
             }
 
@@ -91,7 +94,7 @@ const Login = () => {
                 }
             );
 
-            // console.log('Login Response:', response.data);
+            console.log('Login Response:', response.data.user);
             setIsLogin(true);
             setShowLoginPage(false);
             setUserDetailFromBackend(response.data.user);

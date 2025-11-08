@@ -1,48 +1,104 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { IoSend } from "react-icons/io5";
+import GenerateImgLoading from '../components/GenerateImgLoading';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { AppContext } from '../context/appContext';
+import { useLocation } from 'react-router-dom';
+import { checkImageLoading } from '../utils/auth';
+
+
+
+
+
 
 const Generate = () => {
 
+  const {
+    userDetailFromBackend, setUserDetailFromBackend,
+    imageLoading, setImageLoading,
+    userChatDataArr, setUserChatDataArr,
+    showByePage, setShowByePage, } = useContext(AppContext);
+
+  const inputRef = useRef(null);
 
 
-  const userChatContent = [
-    {
-      prompt: 'Susanta image in side field',
-      imageUrl: '../src/assets/1.jpg'
-    },
-    {
-      prompt: 'The Tata Consultancy Services! (TCS ) is going to hire the 2023, 2024 & 2025 Year of Passing Graduates (Arts, Commerce and Science Streams,) for TCS BPS (except Computer Science and IT streams).',
-      imageUrl: '../src/assets/2.jpg'
-    },
-    {
-      prompt: 'Register and apply for the TCS BPS Hiring process. Click on ‘Register Now’, choose category as ‘BPS’,',
-      imageUrl: '../src/assets/3.jpg'
-    },
-    {
-      prompt: 'After the submission, a WhatsApp group link will come, join it . For further information follow the WhatsApp group.',
-      imageUrl: '../src/assets/2.jpg'
-    },
-  ]
 
   const userChatRef = useRef(null);
-
 
   useEffect(() => {
     userChatRef.current?.scrollTo({
       top: userChatRef.current.scrollHeight,
       behavior: 'auto',
     });
-  }, [userChatContent]);
+  }, [userChatDataArr, imageLoading]);
 
 
 
 
+
+
+  const promptWordCountVerify = (prompt) => {
+    if (!prompt || typeof prompt !== 'string') return false;
+    // Split on spaces, filter out empty strings caused by multiple spaces
+    const words = prompt.trim().split(/\s+/).filter(word => word.length > 0);
+    return words.length >= 4;
+  };
+
+
+  const handelGenerateImg = async () => {
+    const inputPrompt = inputRef.current.value;
+
+
+
+    if (!promptWordCountVerify(inputPrompt)) {
+      toast.warning("Please give an prompt, contain at least 4 words...!");
+      return;
+    }
+
+    await checkImageLoading({ imageLoading, setImageLoading });
+
+    if (!imageLoading) {
+      setImageLoading(true);
+      localStorage.setItem('imageLoading', JSON.stringify(true));
+
+
+      try {
+        const response = await axios.post(
+          '/api/image/generate',
+          { prompt: inputPrompt },
+          { Headers: { 'Content-Type': 'application/json' } },
+        );
+
+        if (response.data.success) {
+
+          setUserDetailFromBackend(response.data.user);
+          console.log('back data', response.data.newImage);
+          setUserChatDataArr(prev => [...prev, response.data.newImage]);
+          
+          inputRef.current.value = '';
+        }
+      } catch (error) {
+        if (error.response) {
+          if (error.response.data.case == 'credits-0') {
+            setShowByePage(true)
+          }
+          console.log(error.response.data);
+          toast.warning(error.response.data.message);
+        }
+      }
+
+      setImageLoading(false)
+      localStorage.setItem('imageLoading', JSON.stringify(false));
+    }
+
+  }
 
 
   return (
     <>
-      <div className='h-auto md:pt-18 lg:pt-18 border-0 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat bg-cover md:bg-[0px_300px] relative z-0'>
+      <div className='h-auto md:pt-18 lg:pt-18 border-0 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat md:bg-[0px_200px] bg-cover  relative z-0'>
         <div className='lg:h-full w-full bg-gradient-to-b from-white to-[#ffffff1f] absolute top-0 left-0 z-[1]'></div>
         <div className='md:h-[calc(100vh-71px)] lg:h-[calc(100vh-73px)] flex justify-center items-start relative z-[2] border-0'>
           <div className='h-full md:w-[90%] lg:w-[55%] flex justify-center items-start border-0'>
@@ -61,23 +117,26 @@ const Generate = () => {
 
 
 
-              <div ref={userChatRef} style={{ scrollbarWidth: 'none' }} className='h-full lg:px-[2%] border-0 overflow-y-scroll scrollbar-hide text-justify '>
-                <div className="flex flex-col justify-end items-end gap-y-4" ref={userChatRef}>
+              <div ref={userChatRef} style={{ scrollbarWidth: 'none' }} className='h-full lg:px-[2%] md:pt-6 border-0 overflow-y-scroll text-justify '>
+                <div className="border-0 min-h-full h-auto flex flex-col justify-end items-end gap-y-8" >
                   {
-                    userChatContent.map((item, i) => {
+                    userChatDataArr.map((item, i) => {
                       return (
                         // <div className='w-full my-2 border-0'>
                         <div className='w-full flex flex-col items-end border-0'>
-                          <div className='w-full'>
-                            <img src={item.imageUrl} alt="user" className="w-50 rounded-xl" />
-                          </div>
-                          <div className="max-w-[70%] mt-4 px-4 py-2 bg-gradient-to-r from-[rgb(57,94,255)] via-[rgba(255,96,123,0.8)] to-[#ffb120] rounded-lg rounded-br-none text-white font-semibold">
+                          <div className="max-w-[70%]  px-4 py-2 bg-gradient-to-r from-[rgb(57,94,255)] via-[rgba(255,96,123,0.8)] to-[#ffb120] rounded-lg rounded-br-none text-white font-semibold">
                             {item.prompt}
+                          </div>
+                          <div className='w-full'>
+                            <img src={item.imageUrl} alt="user" className=" md:w-60 mt-4 rounded-xl" />
                           </div>
                         </div>
                       )
 
                     })
+                  }
+                  {  /// this is use for loading animation of generate image 
+                    imageLoading ? <GenerateImgLoading lastPrompt={inputRef.current.value} /> : ''
                   }
                 </div>
               </div>
@@ -89,7 +148,7 @@ const Generate = () => {
 
               {
                 /* {
-                     userChatContent.map((item, i) => {
+                     userChatDataArr.map((item, i) => {
                        return (
                          <div className='w-full my-2 border-0'>
                            <div>
@@ -110,6 +169,7 @@ const Generate = () => {
 
               <div type='text' className='lg:px-[2%] py-4 relative border-0'>
                 <textarea
+                  ref={inputRef}
                   id="message"
                   name="message"
                   rows={3}
@@ -118,7 +178,9 @@ const Generate = () => {
                   className="w-full px-3 py-1 pr-20 text-base border border-gray-400 rounded-lg 
                   shadow-2xs focus:outline-none focus:ring-2 focus:ring-transparent focus:border-gray-400 
                   resize-none transition-all duration-200"/>
-                <div className="h-10 w-10 absolute bottom-7 md:right-2 lg:right-6 flex items-center gap-2 pl-[11px] rounded-[50%]
+                <div
+                  onClick={() => handelGenerateImg()}
+                  className="h-10 w-10 absolute bottom-7 md:right-2 lg:right-6 flex items-center gap-2 pl-[11px] rounded-[50%]
                  text-white font-semibold  bg-gradient-to-r from-[#5662d3] via-pink-500 to-orange-200
                  shadow-[1px_3px_10px_#4a4a4a72] cursor-pointer group">
                   <IoSend className="text-xl group-hover:translate-x-[2px] transition-all duration-300" />

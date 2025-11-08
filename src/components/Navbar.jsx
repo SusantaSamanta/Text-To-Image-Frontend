@@ -14,6 +14,9 @@ const Navbar = () => {
     const [credits, setCredits] = useState(0);
     const navigate = useNavigate();
 
+
+
+/* 
     useEffect(() => {
         if (!isLogin) return // if user not login this will not run
         const fetchCredits = async () => {
@@ -32,6 +35,10 @@ const Navbar = () => {
 
         // fetchCredits();
     }, [isLogin]);
+
+*/
+
+
 
     const handleLogout = async () => {
         try {
