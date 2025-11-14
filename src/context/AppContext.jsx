@@ -23,9 +23,7 @@ const userChatContent = [
 
 
 
-
-
-import { checkImageLoading, checkUserLogin } from '../utils/auth'
+import { checkUserLogin } from '../utils/auth'
 import { createContext, useState, useEffect } from "react";
 
 
@@ -35,27 +33,12 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
   const [showByePage, setShowByePage] = useState(false); // show bye page or not 
   const [showLoginPage, setShowLoginPage] = useState(false);
   const [signupOrLogin, setSignupOrLogin] = useState('Login');
+  const [isLoading, setIsLoading] = useState(true);
   const [userDetailFromBackend, setUserDetailFromBackend] = useState(null);
-  const [imageLoading, setImageLoading] = useState(JSON.parse(localStorage.getItem("imageLoading")));
+  const [imageLoading, setImageLoading] = useState(false);
   const [userChatDataArr, setUserChatDataArr] = useState([
-    {
-      prompt: 'Susanta image in side field',
-      imageUrl: '../src/assets/1.jpg'
-    },
-    {
-      prompt: 'The Tata Consultancy Services! (TCS ) is going to hire the 2023, 2024 & 2025 Year of Passing Graduates (Arts, Commerce and Science Streams,) for TCS BPS (except Computer Science and IT streams).',
-      imageUrl: '../src/assets/2.jpg'
-    },
-    {
-      prompt: 'Register and apply for the TCS BPS Hiring process. Click on ‘Register Now’, choose category as ‘BPS’,',
-      imageUrl: '../src/assets/3.jpg'
-    },
-    {
-      prompt: 'After the submission, a WhatsApp group link will come, join it . For further information follow the WhatsApp group.',
-      imageUrl: '../src/assets/2.jpg'
-    },
-  ])
-
+  ]);
+  const [userChatLoading, setUserChatLoading] = useState(true);
 
 
   const getFirstName = (fullName) => { // from full name give the first name in first letter capital 
@@ -72,10 +55,12 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
     showByePage, setShowByePage,
     showLoginPage, setShowLoginPage,
     signupOrLogin, setSignupOrLogin,
+    isLoading, setIsLoading,
     userDetailFromBackend, setUserDetailFromBackend,
     getFirstName,
     imageLoading, setImageLoading,
     userChatDataArr, setUserChatDataArr,
+    // userChatLoading, setUserChatLoading,
   }
 
 
@@ -90,6 +75,7 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
         setIsLogin(false);
         setUserDetailFromBackend(null);
       }
+      setIsLoading(false);
     };
     callCheckUserLogin();
     // await checkImageLoading({ imageLoading, setImageLoading});  // DON,T NEED 

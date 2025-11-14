@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../style/Navbar.css'
-import { AppContext } from '../context/AppContext';
+import { AppContext } from '../context/appContext';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

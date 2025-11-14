@@ -10,7 +10,7 @@ import ByeCredit from './pages/ByeCredit';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import { AppContext } from './context/AppContext';
-import ProtectRoute from './components/ProtectRoute';
+import ProtectRoute from './routes/ProtectRoute';
 import Community from './pages/Community';
 
 const App = () => {

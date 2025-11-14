@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { AppContext } from '../context/AppContext';
+import { AppContext } from '../context/appContext';
 import { IoMdClose } from 'react-icons/io';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

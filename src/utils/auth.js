@@ -17,20 +17,85 @@ export const checkUserLogin = async () => {
 
 
 
-export const checkImageLoading = async ({ imageLoading, setImageLoading }) => {
+// export const checkImageLoading = async ({ imageLoading, setImageLoading }) => {  //this can check if user is already process image to block multiple images simultaneously
+//     try {
+//         const { data } = await axios.get('/api/image/processing',);
+//         if (data.success) {
+//             // const localLoading = JSON.parse(localStorage.getItem("imageLoading"));
+//             // console.log( data.processImg);
+//             setImageLoading(data.processImg);
+//             // console.log(imageLoading);
+
+//             // localStorage.setItem('imageLoading', JSON.stringify(data.processImg));
+//             // console.log(JSON.parse(localStorage.getItem("imageLoading")));
+
+//         } else {
+//             console.log('not get loading status');
+//         }
+//     } catch (error) {
+//         console.log('loading error', error);
+
+//     }
+
+// }
+
+
+
+
+export const loadUserChats = async () => {
     try {
-        const { data } = await axios.get('/api/image/processing',);
+        const { data } = await axios.get('/api/image/load-user-chats');
         if (data.success) {
-            // const localLoading = JSON.parse(localStorage.getItem("imageLoading"));
-            // console.log(localLoading, data.processImg);
-                setImageLoading(data.processImg);
-                localStorage.setItem('imageLoading', JSON.stringify(data.processImg));
-        } else {
-            console.log('not get loading status');
+            // console.log(data.chatData);
+            return data.chatData;
+        }
+        else {
+            return [];
         }
     } catch (error) {
-        console.log('loading error', error);
-        
+        console.log(error);
+        return [];
     }
-
 }
+
+
+
+
+export const reqForDeletingImg = async (_id,) => {
+    console.log('deleted...!', _id);
+    try {
+        const { data } = await axios.post('/api/image/image-delete',
+            { imageId: _id },
+            { Headers: { 'Content-Type': 'application/json' } },
+        )
+        if (data.success) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.log('delete error', error);
+        return false;
+    }
+}
+
+// export const reqImgPublic = async (_id,) => {
+//     console.log('deleted...!', _id);
+//     try {
+//         const { data } = await axios.post('/api/image/image-delete',
+//             { imageId: _id },
+//             { Headers: { 'Content-Type': 'application/json' } },
+//         )
+//         if (data.success) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     } catch (error) {
+//         console.log('delete error', error);
+//         return false;
+//     }
+// }
+
+
+
