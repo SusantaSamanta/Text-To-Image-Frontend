@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { AppContext } from '../context/appContext'
+import { AppContext } from '../context/AppContext'
 import { pricePlainDataArr } from '../assets/priceData';
 import { IoMdClose } from 'react-icons/io';
 
