@@ -9,7 +9,7 @@ import Generate from './pages/Generate';
 import ByeCredit from './pages/ByeCredit';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
-import { AppContext } from './context/appContext';
+import { AppContext } from './context/AppContext';
 import ProtectRoute from './routes/ProtectRoute';
 import Community from './pages/Community';
 import SendMailPage from './components/SendMailPage';
@@ -50,7 +50,7 @@ const App = () => {
             </ProtectRoute>
           } />
         </Routes>
-        
+
 
 
       </div>
