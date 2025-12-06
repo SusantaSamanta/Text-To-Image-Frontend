@@ -9,9 +9,12 @@ import Generate from './pages/Generate';
 import ByeCredit from './pages/ByeCredit';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
-import { AppContext } from './context/AppContext';
+import { AppContext } from './context/appContext';
 import ProtectRoute from './routes/ProtectRoute';
 import Community from './pages/Community';
+import SendMailPage from './components/SendMailPage';
+import VerifyEmailPage from './pages/VerifyEmailPage';
+import Footer from './components/Footer';
 
 const App = () => {
   const { showByePage, showLoginPage } = useContext(AppContext)
@@ -30,7 +33,7 @@ const App = () => {
           draggable
           pauseOnHover
           theme="dark"
-          // transition={Bounce}
+        // transition={Bounce}
         />
         <Navbar />
         {showLoginPage && <Login />}
@@ -39,14 +42,16 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/community' element={<Community />} />
+          {/* <Route path='/verify' element={<SendMailPage userDetails={{email: 'susanta'}}/>} /> */}
+          <Route path='/verify-email' element={<VerifyEmailPage />} />
           <Route path='/generate' element={
             <ProtectRoute>
               <Generate />
             </ProtectRoute>
           } />
         </Routes>
+        
 
-        {/* <footer></footer> */}
 
       </div>
     </>

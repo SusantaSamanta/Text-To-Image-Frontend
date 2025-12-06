@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import HomeImageGallery from '../components/HomeImageGallery'
 import HomeHeader from '../components/HomeHeader'
+import Footer from '../components/Footer';
 const Home = () => {
     return (
         <>
@@ -18,7 +19,7 @@ const Home = () => {
                 {/* <svg className='border-0 absolute left-0 bottom-0' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f5" fill-opacity="1" d="M0,128L48,112C96,96,192,64,288,90.7C384,117,480,203,576,197.3C672,192,768,96,864,90.7C960,85,1056,171,1152,192C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg> */}
 
             </div>
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit ullam, id ex voluptatum eius omnis molestias aperiam commodi! Magnam asperiores ipsum perspiciatis error ullam facere impedit itaque possimus quis debitis.</h1>
+            <Footer/>
         </>
     )
 }

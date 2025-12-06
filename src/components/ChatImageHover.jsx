@@ -4,7 +4,7 @@ import { PiDownloadSimpleBold, PiShareFatBold } from "react-icons/pi";
 
 import { MdDeleteOutline, MdOutlinePublicOff, MdOutlinePublic } from "react-icons/md";
 import { toast } from 'react-toastify';
-import { AppContext } from '../context/appContext';
+import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 
 
@@ -44,7 +44,7 @@ const ChatImageHover = ({ otherData }) => {
                 { Headers: { 'Content-Type': 'application/json' } },
             )
             if (data.success) {
-                // console.log(data.updatedImage);
+                console.log(data.updatedImage);
                 setUserChatDataArr(prev => prev.map(item => item._id == _id ? { ...item, isPublic: data.updatedImage.isPublic } : item))
             } else {
                 toast.error('This feature is not working now.')

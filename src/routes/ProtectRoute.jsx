@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { AppContext } from '../context/appContext'
+import { AppContext } from '../context/AppContext'
 import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PageLoading from '../components/PageLoading';

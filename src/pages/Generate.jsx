@@ -4,7 +4,7 @@ import { IoSend } from "react-icons/io5";
 import GenerateImgLoading from '../components/GenerateImgLoading';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { AppContext } from '../context/appContext';
+import { AppContext } from '../context/AppContext';
 import { useLocation } from 'react-router-dom';
 import { loadUserChats } from '../utils/auth';
 import EmptyChat from '../components/EmptyChat';

@@ -24,7 +24,7 @@ const HomeHeader = () => {
                         text-base lg:text-xl font-bold rounded-2xl lg:shadow-[5px_5px_10px_#4a4a4a72] hover:bg-blue-700 
                         hover:shadow-lg hover:scale-[1.02] hover:lg:lg:shadow-[5px_5px_10px_#4a4a4a72]  transition-all duration-200 ease-in-out">
                         Generate Image
-                        <img className='lg:w-[30px] border-0 inline' src='../src/assets/ai_star.png' />
+                        <img className='md:w-[30px] border-0 inline' src='../src/assets/ai_star.png' />
                     </button>
                 </Link>
             </motion.section>

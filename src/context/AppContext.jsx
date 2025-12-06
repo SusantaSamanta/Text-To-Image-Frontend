@@ -36,9 +36,8 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
   const [isLoading, setIsLoading] = useState(true);
   const [userDetailFromBackend, setUserDetailFromBackend] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
-  const [userChatDataArr, setUserChatDataArr] = useState([
-  ]);
-  const [userChatLoading, setUserChatLoading] = useState(true);
+  const [userChatDataArr, setUserChatDataArr] = useState([]);
+  const [showSendMailPage, setShowSendMailPage] = useState(false);
 
 
   const getFirstName = (fullName) => { // from full name give the first name in first letter capital 
@@ -61,6 +60,7 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
     imageLoading, setImageLoading,
     userChatDataArr, setUserChatDataArr,
     // userChatLoading, setUserChatLoading,
+    showSendMailPage, setShowSendMailPage
   }
 
 

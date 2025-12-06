@@ -79,23 +79,7 @@ export const reqForDeletingImg = async (_id,) => {
     }
 }
 
-// export const reqImgPublic = async (_id,) => {
-//     console.log('deleted...!', _id);
-//     try {
-//         const { data } = await axios.post('/api/image/image-delete',
-//             { imageId: _id },
-//             { Headers: { 'Content-Type': 'application/json' } },
-//         )
-//         if (data.success) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     } catch (error) {
-//         console.log('delete error', error);
-//         return false;
-//     }
-// }
+
 
 
 

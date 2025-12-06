@@ -125,6 +125,39 @@ S4: to use notification : on any file
         toast.error(data.message) ,
     
 
+///////// ⭐⭐⭐   How to Know user scroll end of the page   ⭐⭐⭐  /////////
+ const handelLoadingImages = async () => {
+    try {
+      console.log('Total document or window height : ', document.documentElement.scrollHeight);
+      console.log('View port Hight : ', window.innerHeight);
+      console.log('Distance of Scroll from top : ', document.documentElement.scrollTop);
+      if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight){
+        console.log('reach end : ',window.innerHeight + document.documentElement.scrollTop + 1, '>=',document.documentElement.scrollHeight);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handelLoadingImages) // this event function will execute when user scroll 
+  }, [])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
