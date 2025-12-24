@@ -205,7 +205,7 @@ const Community = () => {
                         style={{
                           backgroundImage: `url("${item.imageUrl}")`,
                         }}
-                      >{item._id.slice(-3)}</div>
+                      ><span className="text-[#3c3c3c6d] text-sm ml-2">{item._id.slice(-3)}</span></div>
 
                     </div>
                   )

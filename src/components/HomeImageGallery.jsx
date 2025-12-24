@@ -16,8 +16,8 @@ const HomeImageGallery = () => {
                     {
                         Array(8).fill(1).map((item, i) => {
                             const randomNumber = Math.floor(Math.random() * 4) + 1;
-                            console.log(randomNumber);
-                            const imageUrl = `/src/assets/${randomNumber}.jpg`; // or use import if needed
+                            // console.log(randomNumber);
+                            const imageUrl = `../src/assets/${randomNumber}.jpg`; // or use import if needed
                             console.log(imageUrl);
                             
                             const adStyle = {
@@ -41,7 +41,7 @@ const HomeImageGallery = () => {
                     {
                         Array(9).fill(1).map((item, i) => {
                             const randomNumber = Math.floor(Math.random() * 4) + 1;
-                            const imageUrl = `/src/assets/${randomNumber}.jpg`; // or use import if needed
+                            const imageUrl = `../src/assets/${randomNumber}.jpg`; // or use import if needed
                             const adStyle = {
                                 width: `${80 + Math.floor(Math.random() * 50)}px`,
                                 backgroundImage: `url(${imageUrl})`,
@@ -49,7 +49,7 @@ const HomeImageGallery = () => {
                             return <div key={i} style={adStyle} className={`h-20 border-1 border-gray-300 w-20 rounded-xl bg-center bg-cover bg-no-repeat`}></div>
                         })
                     }
-                    <div
+                    <Link to={'/community'}
                         onClick={() => {
                             const gallerySection = document.getElementById("gallery");
                             if (gallerySection) {
@@ -59,7 +59,7 @@ const HomeImageGallery = () => {
                         className="flex items-center justify-center w-24 h-20 rounded-xl border-2 border-dashed border-black cursor-pointer"
                     >
                         <span className="text-sm font-semibold">View More</span>
-                    </div>
+                    </Link>
 
                 </motion.div>
             </motion.section>
