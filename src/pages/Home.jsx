@@ -7,8 +7,8 @@ import Footer from '../components/Footer';
 const Home = () => {
     return (
         <>
-            <div className='border-0 lg:h-auto lg:mb-5 lg:pb-35  lg:pt-20 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat bg-cover relative z-0'>
-                <div className='lg:h-full w-full bg-gradient-to-b from-white to-[#ffffff1f] absolute top-0 left-0 z-[1]'></div>
+            <div className='border-0 h-auto md:pt-35 md:pb-25 lg:p-0 lg:h-auto lg:mb-5 lg:pb-35  lg:pt-20 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat bg-cover relative z-0'>
+                <div className='border-0 h-full w-full bg-gradient-to-b from-white to-[#ffffff55] absolute top-0 left-0 z-[1]'></div>
 
                 <HomeHeader />
 
