@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom';
-import profile1 from "../media/ForAboutPage/profile1.jpg";
 import ai_star_png from "../src/assets/ai_star.png";
 
 const HomeHeader = () => {
