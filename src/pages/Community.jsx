@@ -188,10 +188,10 @@ const Community = () => {
       <div className='h-screen w-full bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat md:bg-[0px_100px] bg-cover fixed left-0 top-0 z-[1]'></div>
 
       {
-        <div className="lg:px-20 md:pt-20  flex flex-col justify-center items-center relative top-0 left-0 z-[3] border-0">
-          <div className="border-0 md:w-[90%] lg:max-w-[1000px] ">
-            <h1 className="border-0 w-full md:mb-8 md:pl-2 md:text-3xl font-bold text-left ">Explore Ideas like this</h1>
-            <div className="flex flex-wrap border-0 justify-start items-center md:mb-8 ">
+        <div className="pt-15 px-2 lg:px-20 md:pt-20  flex flex-col justify-center items-center relative top-0 left-0 z-[3] border-0">
+          <div className="border-0 w-full md:w-[90%] lg:max-w-[1000px] ">
+            <h1 className="border-0 w-full mb-4 md:mb-8 md:pl-2 text-2xl md:text-3xl font-bold text-left ">Explore Ideas like this</h1>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-0 border-0 justify-start items-center md:mb-8 ">
 
 
               {
@@ -199,7 +199,7 @@ const Community = () => {
                   widthArrIndex = (widthArrIndex == 11) ? 0 : widthArrIndex + 1
 
                   return (
-                    <div className="border-0 h-50 md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndex]}%` }}>
+                    <div className="border-0 h-40 md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndex]}%` }}>
                       <div
                         className="h-full border-0 bg-no-repeat bg-center bg-cover rounded-lg shadow-[1px_1px_5px_1px_#3030306a] hover:shadow-[2px_2px_8px_3px_#3030306a]"
                         style={{
@@ -215,7 +215,7 @@ const Community = () => {
                 Array(8).fill(1).map((item, i) => {
                   widthArrIndexForLoading = (widthArrIndexForLoading == 11) ? 0 : widthArrIndexForLoading + 1
                   return (
-                    <div className="border-0 h-50 w-[25%] md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndexForLoading]}%` }}>
+                    <div className="border-0 h-40  md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndexForLoading+75]}%` }}>
                       <div
                         className="h-full rounded-2xl bg-gradient-to-l from-[#e0e0e08e] via-[#ffffffa5] to-[#e0e0e08e] shimmer shadow-[1px_1px_8px_#30303044] opacity-50"
                       ></div>

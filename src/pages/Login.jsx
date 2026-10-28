@@ -143,7 +143,7 @@ const Login = () => {
     return (
         <>
             <div className='h-screen w-full fixed left-0 top-0 z-[11] backdrop-blur-[2px] bg-[#0000008b]
-                  flex justify-center items-center'>
+                  flex items-end justify-center sm:items-center overflow-y-auto'>
 
                 {
                     showSendMailPage ?
@@ -151,19 +151,19 @@ const Login = () => {
 
                         :
 
-                        <div className='md:w-[450px] md:py-10 md:px-12 bg-[#ffffffed] relative flex flex-col justify-start items-center rounded-3xl'>
+                        <div className='w-full sm:max-w-[450px] py-8 px-4 pb-20 sm:pb-10 ms:py-10 sm:px-8 bg-[#ffffffed] relative flex flex-col justify-start items-center rounded-t-2xl sm:rounded-3xl'>
                             <button
                                 onClick={() => setShowLoginPage(false)}
-                                className='bg-white  md:p-1  rounded-full md:shadow-[2px_2px_8px_#4a4a4a72] text-black absolute top-4 right-4 cursor-pointer'><IoMdClose />
+                                className='bg-white p-1 rounded-full md:shadow-[2px_2px_8px_#4a4a4a72] text-black absolute top-4 right-4 cursor-pointer'><IoMdClose />
                             </button>
 
-                            <div className='md:mb-2 font-semibold md:text-2xl '>
+                            <div className='mb-2 font-semibold text-xl sm:text-2xl '>
                                 {
                                     signupOrLogin
                                 }
                             </div>
                             {
-                                (signupOrLogin == 'Sign Up') ? <h1 className='md:mb-4'>Welcome! Please create your account</h1> : <h1 className='md:mb-4'>Welcome back! Please login</h1>
+                                (signupOrLogin == 'Sign Up') ? <h1 className='mb-4 text-center text-sm md:text-base'>Welcome! Please create your account</h1> : <h1 className='mb-4 text-center text-sm md:text-base'>Welcome back! Please login</h1>
                             }
 
                             <form
@@ -235,14 +235,14 @@ const Login = () => {
                             </form>
                             {
                                 (signupOrLogin == 'Sign Up') ?
-                                    <h1 className='md:mt-4 select-none'>Already have an account?
+                                    <h1 className='mt-4 text-sm md:text-base text-center select-none'>Already have an account?
                                         <span onClick={() => {
                                             setSignupOrLogin('Login');
                                             errorMessageRef.current.style.display = "none";
                                         }} className='ml-1 text-blue-700 cursor-pointer'>Login</span>
                                     </h1>
                                     :
-                                    <h1 className='lg:mt-4 select-none'>Don't have an account?
+                                    <h1 className='mt-2 md:mt-4 text-sm md:text-base text-center select-none'>Don't have an account?
                                         <span onClick={() => {
                                             setSignupOrLogin('Sign Up');
                                             errorMessageRef.current.style.display = "none"
