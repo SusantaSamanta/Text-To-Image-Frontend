@@ -114,7 +114,7 @@ const HomeImageGallery = () => {
                                 width: `${secondRowWidths[i]}px`,
                                 backgroundImage: `url(${galleryImagesArr[i + 8]})`,
                             };
-                            return <div key={i} style={adStyle} className={`h-20 border-1 border-gray-300 w-20 rounded-xl bg-center bg-cover bg-no-repeat`}></div>
+                            return <div key={i} style={adStyle} className={`h-20 border-1 border-gray-300 w-20 rounded-xl bg-center bg-cover bg-no-repeat bg-gray-400/20 `}></div>
                         })
                     }
                     <Link to={'/community'}

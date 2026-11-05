@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -12,12 +12,15 @@ import Login from './pages/Login';
 import { AppContext } from './context/AppContext';
 import ProtectRoute from './routes/ProtectRoute';
 import Community from './pages/Community';
-import SendMailPage from './components/SendMailPage';
+// import SendMailPage from './components/SendMailPage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
-import Footer from './components/Footer';
+import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
+import BackendConnectionLoading from './components/BackendConnectionLoading';
+// import Footer from './components/Footer';
 
 const App = () => {
-  const { showByePage, showLoginPage } = useContext(AppContext)
+  const { showByePage, showLoginPage, } = useContext(AppContext)
 
   return (
     <>
@@ -49,9 +52,16 @@ const App = () => {
               <Generate />
             </ProtectRoute>
           } />
+          <Route path='/profile' element={
+            <ProtectRoute>
+              <Profile />
+            </ProtectRoute>
+          } />
+
+          <Route path='*' element={<NotFound />} />
         </Routes>
 
-
+        <BackendConnectionLoading />
 
       </div>
     </>

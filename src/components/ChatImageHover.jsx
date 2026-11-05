@@ -9,6 +9,8 @@ import axios from 'axios';
 
 
 const ChatImageHover = ({ otherData }) => {
+    if(!otherData.imageUrl) return;
+    
     const { userChatDataArr, setUserChatDataArr, } = useContext(AppContext)
 
     const { _id, prompt, imageUrl, isPublic, createdAt } = otherData;

@@ -23,7 +23,7 @@ export default function VerifyEmailPage() {
     navigate('/')
   }
   const handelShowSignup = () => {
-    toast.warning('Sorry this feature not working, please register again to send verification email....!')
+    toast.warning('Sorry this feature coming soon, please register again.')
     setShowLoginPage(true);
     setSignupOrLogin('Sign Up');
     navigate('/')
@@ -39,7 +39,7 @@ export default function VerifyEmailPage() {
       <div className='h-screen w-full bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat md:bg-[0px_100px] bg-cover fixed left-0 top-0 z-[1]'></div>
       <div className="border-0 min-h-screen flex flex-col items-center justify-center px-4 relative z-[4]">
         {/* Card */}
-        <div className="bg-[#ffffff85] shadow-lg rounded-2xl p-6 md:p-10 max-w-lg w-full text-center border-0 ">
+        <div className="bg-[#ffffff] shadow-xl rounded-2xl p-6 md:p-10 max-w-lg w-full text-center border border-gray-50">
           {/* Icon */}
           {isSuccess ? (
             <div className="mx-auto mb-6 flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">

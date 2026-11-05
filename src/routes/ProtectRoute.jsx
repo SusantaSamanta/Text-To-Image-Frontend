@@ -6,7 +6,7 @@ import PageLoading from '../components/PageLoading';
 // import Login from '../pages/Login';
 
 const ProtectRoute = (props) => {
-  const { isLogin, setShowLoginPage, isLoading, setIsLoading } = useContext(AppContext);
+  const { isLogin, setShowLoginPage, isLoading } = useContext(AppContext);
 
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { AppContext } from "../context/AppContext";
+import React, { useEffect, useRef, useState } from "react";
+
 import axios from "axios";
 
 const Community = () => {
@@ -199,20 +199,21 @@ const Community = () => {
                   widthArrIndex = (widthArrIndex == 11) ? 0 : widthArrIndex + 1
 
                   return (
-                    <div className="border-0 h-40 md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndex]}%` }}>
+                    <div className="border-0 h-40 md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndex +75]}%` }}>
                       <div
                         className="h-full border-0 bg-no-repeat bg-center bg-cover rounded-lg shadow-[1px_1px_5px_1px_#3030306a] hover:shadow-[2px_2px_8px_3px_#3030306a]"
                         style={{
                           backgroundImage: `url("${item.imageUrl}")`,
                         }}
-                      ><span className="text-[#3c3c3c6d] text-sm ml-2">{item._id.slice(-3)}</span></div>
+                      >
+                        <span className="hidden text-[#3c3c3c6d] text-sm ml-2">{item._id.slice(-3)}</span></div>
 
                     </div>
                   )
                 })
               }
               {
-                Array(8).fill(1).map((item, i) => {
+                Array(8).fill(1).map(() => {
                   widthArrIndexForLoading = (widthArrIndexForLoading == 11) ? 0 : widthArrIndexForLoading + 1
                   return (
                     <div className="border-0 h-40  md:h-60 lg:h-55 text-xl md:p-2  " style={{ width: `${widthArrForImages.current[widthArrIndexForLoading+75]}%` }}>

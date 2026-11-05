@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AppContext } from '../context/AppContext';
 import { IoMdClose } from 'react-icons/io';
 import axios from 'axios';
@@ -33,11 +33,12 @@ const Login = () => {
     }, []);
 
 
+    const [regLoading, setRegLoading] = useState(false);
 
     const handelRegistration = async () => {
         if (blockFrequentClick.current == false) {
             console.log('block');
-            
+
             return;
         }
         blockFrequentClick.current = false;
@@ -50,6 +51,7 @@ const Login = () => {
 
 
         try {
+            setRegLoading(true)
             const response = await axios.post(
                 '/api/user/register',
                 { name, email, password },
@@ -86,6 +88,8 @@ const Login = () => {
             } else {
                 toast.error(`Error :${err.message}`);
             }
+        } finally {
+            setRegLoading(false)
         }
         blockFrequentClick.current = true;
     };
@@ -94,6 +98,7 @@ const Login = () => {
 
 
 
+    const [loginLoading, setLoginLoading] = useState(false);
     const handelLogin = async () => {
         const formData = new FormData(formRef.current);
         const data = Object.fromEntries(formData.entries());
@@ -102,6 +107,7 @@ const Login = () => {
         const { email, password } = data;
         // console.log(data);
         try {
+            setLoginLoading(true)
             const response = await axios.post(
                 '/api/user/login', // ✅ Added protocol
                 {
@@ -120,9 +126,9 @@ const Login = () => {
             setUserDetailFromBackend(response.data.user);
             navigate('/');
             toast.success(response.data.message);
-            setTimeout(() => {
-                toast.success(`Welcome back ${getFirstName(response.data.user.name)}`);
-            }, 1000);
+            // setTimeout(() => {
+            //     toast.success(`Welcome back ${getFirstName(response.data.user.name)}`);
+            // }, 1000);
             // console.log(getFirstName(response.data.user.name));
 
 
@@ -136,6 +142,8 @@ const Login = () => {
             } else {
                 console.log('Error:', err.message);
             }
+        } finally {
+            setLoginLoading(false);
         }
     };
 
@@ -214,21 +222,23 @@ const Login = () => {
                                 {
                                     (signupOrLogin == 'Sign Up') ?
                                         <button
+                                            disabled={regLoading}
                                             onClick={() => handelRegistration()}
                                             type="button"
                                             id="submitBtn"
-                                            className="w-full bg-blue-600 text-white py-2 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg active:scale-[0.98] cursor-pointer"
+                                            className="w-full bg-blue-600 text-white py-2 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed"
                                         >
-                                            Sign Up
+                                            {regLoading ? "Loading.." : "Sign Up"}
                                         </button>
                                         :
                                         <button
+                                            disabled={loginLoading}
                                             onClick={() => handelLogin()}
                                             type="button"
                                             id="submitBtn"
-                                            className="w-full bg-blue-600 text-white py-2 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg active:scale-[0.98] cursor-pointer"
+                                            className="w-full bg-blue-600 text-white py-2 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed"
                                         >
-                                            Login
+                                            {loginLoading ? "Loading..." : "Login"}
                                         </button>
                                 }
 

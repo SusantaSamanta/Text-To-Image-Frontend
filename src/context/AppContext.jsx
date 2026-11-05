@@ -25,6 +25,7 @@ const userChatContent = [
 
 import { checkUserLogin } from '../utils/auth'
 import { createContext, useState, useEffect } from "react";
+import { serverConnectionStatus } from '../utils/serverConnectionStatus';
 
 
 export const AppContext = createContext();
@@ -38,6 +39,8 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
   const [imageLoading, setImageLoading] = useState(false);
   const [userChatDataArr, setUserChatDataArr] = useState([]);
   const [showSendMailPage, setShowSendMailPage] = useState(false);
+  const [isServerLoading, setIsServerLoading] = useState(false);
+  const [isServerConnected, setIsServerConnected] = useState(true);
 
 
   const getFirstName = (fullName) => { // from full name give the first name in first letter capital 
@@ -60,7 +63,9 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
     imageLoading, setImageLoading,
     userChatDataArr, setUserChatDataArr,
     // userChatLoading, setUserChatLoading,
-    showSendMailPage, setShowSendMailPage
+    showSendMailPage, setShowSendMailPage,
+    isServerLoading, setIsServerLoading,
+    isServerConnected, setIsServerConnected,
   }
 
 
@@ -80,6 +85,39 @@ const AppContextProvider = (props) => {  // receive <App/> from main.jsx as prop
     callCheckUserLogin();
     // await checkImageLoading({ imageLoading, setImageLoading});  // DON,T NEED 
   }, []);
+
+
+
+
+
+  useEffect(() => {
+    const isAlreadyConnected = JSON.parse(localStorage.getItem("server")) || null;
+
+    if (isAlreadyConnected && isAlreadyConnected.isRunning && isAlreadyConnected.time > Date.now()) {
+      console.log(isAlreadyConnected)
+      setIsServerConnected(true);
+      setIsLoading(true);
+      return
+    }
+    setIsServerConnected(false);
+
+    async function serverStatus() {
+      setIsServerLoading(true);
+      const status = await serverConnectionStatus();
+      setIsServerConnected(status ? true : false);
+      setIsServerLoading(false);
+      if (status) {
+        localStorage.setItem("server", JSON.stringify({ isRunning: true, time: Date.now() + 15 * 60 * 1000, }));
+      } else {
+        localStorage.setItem("server", JSON.stringify({ isRunning: false, time: Date.now() }));
+      }
+    }
+    serverStatus();
+    setInterval(() => {
+      serverStatus();
+    }, 10000);
+  }, []);
+
 
 
 

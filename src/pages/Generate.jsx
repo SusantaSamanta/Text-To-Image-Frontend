@@ -5,12 +5,13 @@ import GenerateImgLoading from '../components/GenerateImgLoading';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { AppContext } from '../context/AppContext';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { loadUserChats } from '../utils/auth';
 import EmptyChat from '../components/EmptyChat';
 import ChatLoading from '../components/ChatLoading';
 import ChatImageHover from '../components/ChatImageHover';
-
+import fallbackImage from "../assets/fallback-image.jpg";
+import { FiCopy } from 'react-icons/fi';
 
 
 
@@ -74,7 +75,7 @@ const Generate = () => {
 
 
   useEffect(() => {
-   
+
     const callLoadingChatsFun = async () => {
       const chat = await loadUserChats();
       setUserChatDataArr(chat);
@@ -146,19 +147,28 @@ const Generate = () => {
   }
 
 
+  const copyPrompt = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success('Prompt copied!');
+    } catch {
+      toast.error('Failed to copy prompt');
+    }
+  };
+
   return (
     <>
-      <div className='h-auto md:pt-18 lg:pt-18 border-0 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat md:bg-[0px_200px] bg-cover  relative z-0'>
-        <div className='lg:h-full w-full bg-gradient-to-b from-white to-[#ffffff1f] absolute top-0 left-0 z-[1]'></div>
-        <div className='md:h-[calc(100vh-71px)] lg:h-[calc(100vh-73px)] flex justify-center items-start relative z-[2] border-0'>
-          <div className='h-full md:w-[90%] lg:w-[55%] flex justify-center items-start border-0'>
+      <div className='h-auto border-0 bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat bg-[0px_200px] bg-cover relative z-0'>
+        <div className='h-full w-full bg-gradient-to-b from-white to-[#ffffff1f] absolute top-0 left-0 z-[1]'></div>
+        <div className='h-screen pt-14 md:pt-15 flex justify-center items-start relative z-[2] border-0 px-2 md:px-8'>
+          <div className='h-full w-full max-w-4xl flex justify-center items-start border-0'>
             <section className='h-full w-full relative border-0 flex flex-col justify-between'>
               <div className='lg:h-14 lg:px-[2%] border-0 sticky z-2 top-0 left-0 shadow-[-8px_5px_10px_10px_white] flex justify-between items-center'>
                 <div className='flex flex-col'>
-                  <span className='text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4550af] via-pink-500 to-orange-400'>
+                  <span className='text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4550af] via-pink-500 to-orange-400'>
                     Generate Images with Ai
                   </span>
-                  <Link to='/user/image' className='text-blue-600'>All images...</Link>
+                  <Link to='/profile' className='text-blue-600'>All images...</Link>
                 </div>
                 {/* <div>Try our Idea</div> */}
               </div>
@@ -167,7 +177,7 @@ const Generate = () => {
 
 
 
-              <div ref={userChatRef} style={{ scrollbarWidth: 'none' }} className='h-full lg:px-[2%] md:pt-6 border-0 overflow-y-scroll text-justify '>
+              <div ref={userChatRef} style={{ scrollbarWidth: 'none' }} className='h-full lg:px-[2%] pt-6 border-0 overflow-y-scroll text-justify '>
                 <div className="border-0 min-h-full h-auto flex flex-col justify-end items-end gap-y-8" >
 
                   {
@@ -176,12 +186,28 @@ const Generate = () => {
                         return (
                           // <div className='w-full my-2 border-0'>
                           <div className='w-full flex flex-col items-end border-0'>
-                            <div className="max-w-[70%]  px-4 py-2 bg-gradient-to-r from-[rgb(57,94,255)] via-[rgba(255,96,123,0.8)] to-[#ffb120] rounded-lg rounded-br-none text-white font-semibold">
+                            <div
+                              // onClick={() => copyPrompt(item.prompt)}
+                              className="max-w-[70%] px-4 py-2 pr-9 relative group cursor-pointer bg-gradient-to-r from-[rgb(57,94,255)] via-[rgba(255,96,123,0.8)] to-[#ffb120] rounded-lg rounded-br-none text-white font-semibold"
+                            >
                               {item.prompt}
+                              <button
+                                type="button"
+                                aria-label="Copy prompt"
+                                onClick={(e) => { e.stopPropagation(); copyPrompt(item.prompt); }}
+                                className='absolute button-1 right-2  p-1 rounded-md bg-white/20 hover:bg-white/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 cursor-pointer'
+                              >
+                                <FiCopy size={14} />
+                              </button>
                             </div>
                             <div className='w-full'>
-                              <div className='mt-4 md:w-60 border-0 group relative overflow-hidden'>
-                                <img src={item.imageUrl} alt="user" className="w-full rounded-xl " />
+                              <div className={`mt-4 h-50 w-50 md:h-60 md:w-60 border-0 group relative overflow-hidden ${!item.imageUrl ? "opacity-25 cursor-not-allowed" : ""}`}>
+                                <img src={item.imageUrl || fallbackImage}
+                                  onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = fallbackImage;
+                                  }}
+                                  alt="user" className="w-full rounded-xl rounded-bl-none" />
                                 <ChatImageHover otherData={item} />
                               </div>
                             </div>
@@ -230,7 +256,7 @@ const Generate = () => {
 
 
 
-              <div type='text' className='lg:px-[2%] py-4 relative border-0'>
+              <div type='text' className='w-full lg:px-[2%] py-4 relative border-0'>
                 <textarea
                   ref={inputRef}
                   id="message"
@@ -243,10 +269,10 @@ const Generate = () => {
                   resize-none transition-all duration-200"/>
                 <div
                   onClick={() => handelGenerateImg()}
-                  className="h-10 w-10 absolute bottom-7 md:right-2 lg:right-6 flex items-center gap-2 pl-[11px] rounded-[50%]
+                  className="h-8 md:h-10 w-8 md:w-10 absolute bottom-7 right-2 lg:right-6 flex items-center gap-2 pl-[11px] rounded-[50%]
                  text-white font-semibold  bg-gradient-to-r from-[#5662d3] via-pink-500 to-orange-200
                  shadow-[1px_3px_10px_#4a4a4a72] cursor-pointer group">
-                  <IoSend className="text-xl group-hover:translate-x-[2px] transition-all duration-300" />
+                  <IoSend className="text-sm md:text-xl group-hover:translate-x-[2px] transition-all duration-300" />
                 </div>
               </div>
             </section>

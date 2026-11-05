@@ -1,4 +1,5 @@
 import React from "react";
+import { BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 
 export default function Footer() {
@@ -15,10 +16,10 @@ export default function Footer() {
 
 
         <div className="lg:w-42 flex justify-center items-center gap-3 sm:gap-4 text-black border-0">
+          <a href="https://in.linkedin.com/in/susanta-samanta-10a283330" className="hover:text-gray-200"><BsLinkedin size={17} /></a>
+          <a href="https://github.com/SusantaSamanta" className="hover:text-gray-200"><FaGithub size={18} /></a>
           <a href="#" className="hover:text-gray-200"><FaFacebook size={18} /></a>
-          <a href="#" className="hover:text-gray-200"><FaTwitter size={18} /></a>
           <a href="#" className="hover:text-gray-200"><FaInstagram size={18} /></a>
-          <a href="#" className="hover:text-gray-200"><FaGithub size={18} /></a>
         </div>
 
       </div>

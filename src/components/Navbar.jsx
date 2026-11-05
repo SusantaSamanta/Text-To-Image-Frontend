@@ -50,7 +50,7 @@ const Navbar = () => {
             )
 
             toast.success(data.message);
-            setTimeout(() => toast.success(`Goodby ${getFirstName(data.user.name)}`) , 1000);
+            // setTimeout(() => toast.success(`Goodby ${getFirstName(data.user.name)}`) , 1000);
             setIsLogin(false);
             setShowLoginPage(false);
             setUserDetailFromBackend(false);
@@ -64,13 +64,13 @@ const Navbar = () => {
     return (
         <>
             <div className='fixed left-0 top-0 w-full z-10'>
-            <motion.div id='navbarStyle' className='w-full py-1 md:py-3 px-2 md:px-8 lg:px-32 flex justify-between items-center bg-white/95 md:bg-white/60 backdrop-blur-lg md:backdrop-blur-sm'
+            <motion.div id='navbarStyle' className='w-full py-1 md:py-3 px-2 md:px-8 lg:px-32 flex justify-between items-center bg-white/95 md:bg-white/90 backdrop-blur-lg md:backdrop-blur-sm'
             // initial={{ opacity: 0, y: -10 }}
             // transition={{ duration: 1 }}
             // whileInView={{ opacity: 1, y: 0 }}
             >
                 <Link to='/' className=' flex items-start w-auto relative' onClick={closeMenu}>
-                    <img className='scale-[1] lg:scale-[1.2] relative -left-1' src='../app_logo.png' />
+                    <img className=' relative -left-1' src='../app_logo.png' />
                 </Link>
 
                 {/* Desktop navigation */}
@@ -82,9 +82,9 @@ const Navbar = () => {
                             <div className='border-0 w-auto flex items-center gap-2 lg:gap-4 text-gray-700'>
                                 <Link to='/generate' className=' border-b-2 border-transparent hover:border-black transition duration-200'>Generate</Link>
                                 <button  // to show byeCredit page using AddContext.showByePage
-                                    className='px-3 lg:px-6 py-2 bg-blue-400 hover:bg-blue-500 shadow-[2px_2px_6px_#4a4a4a72] text-white rounded-2xl'
+                                    className='px-3 lg:px-3 py-1 bg-blue-400 hover:bg-blue-500 shadow-[2px_2px_6px_#4a4a4a72] text-white rounded-2xl'
                                     onClick={() => setShowByePage(true)}>
-                                    <p> <span className='md:hidden lg:inline-block'>Credits left :</span> <span className='md:inline-block lg:hidden'>Credits : </span>
+                                    <p> <span className='md:hidden lg:inline-block'>Credits:</span> <span className='md:inline-block lg:hidden'>Credits : </span>
                                         {
                                             (userDetailFromBackend && userDetailFromBackend.credits)
                                         }
@@ -97,8 +97,8 @@ const Navbar = () => {
                                                 ` ${getFirstName(userDetailFromBackend.name)}`)
                                         }
                                     </Link>
-                                    <Link to={'/profile'} className='lg:ml-2 h-10 w-10 flex items-center justify-center shadow-[1px_3px_10px_#4a4a4a72] bg-blue-500 text-white rounded-full border-2 relative group'>
-                                        <p className='text-2xl font-light uppercase ' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                                    <Link to={'/profile'} className='lg:ml-2 h-9 w-9 flex items-center justify-center shadow-[1px_3px_10px_#4a4a4a72] bg-blue-500 text-white rounded-full border-2 relative group'>
+                                        <p className='text-xl font-light uppercase ' style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
                                             {
                                                 (userDetailFromBackend &&
                                                     ` ${getFirstName(userDetailFromBackend.name)[0]}`)
@@ -121,7 +121,7 @@ const Navbar = () => {
 
                             <div className='border-0 flex items-center gap-2 lg:gap-4 text-gray-700'>
                                 <Link to='/generate' className=' border-b-2 border-transparent hover:border-gray-500 transition duration-300'>Generate</Link>
-                                <Link onClick={() => setShowLoginPage(true)} className='px-6 py-2 bg-black hover:bg-blue-900 text-white rounded-2xl transition duration-300'>Login</Link>
+                                <Link onClick={() => setShowLoginPage(true)} className='px-4 py-1.5 bg-black hover:bg-blue-900 text-white rounded-xl transition duration-300'>Login</Link>
                             </div>
 
                     }
@@ -150,7 +150,7 @@ const Navbar = () => {
                             isLogin ?
                                 <>
                                     <button
-                                        className='w-full px-3 py-2 bg-blue-400 hover:bg-blue-500 shadow-[2px_2px_6px_#4a4a4a72] text-white rounded-2xl'
+                                        className='w-full px-3 py-1.5 bg-blue-400 hover:bg-blue-500 shadow-[2px_2px_6px_#4a4a4a72] text-white rounded-xl'
                                         onClick={() => { setShowByePage(true); closeMenu(); }}>
                                         <p>Credits left : {userDetailFromBackend && userDetailFromBackend.credits}</p>
                                     </button>
@@ -168,13 +168,13 @@ const Navbar = () => {
                                                     ` ${getFirstName(userDetailFromBackend.name)}`)
                                             }
                                         </Link>
-                                        <button className='px-4 py-2 bg-black hover:bg-blue-900 text-white rounded-2xl transition duration-300' onClick={() => { handleLogout(); closeMenu(); }}>
+                                        <button className='px-4 py-1.5 bg-black hover:bg-blue-900 text-white rounded-2xl transition duration-300' onClick={() => { handleLogout(); closeMenu(); }}>
                                             Logout
                                         </button>
                                     </div>
                                 </>
                                 :
-                                <Link onClick={() => { setShowLoginPage(true); closeMenu(); }} className='w-full text-center px-6 py-2 bg-black hover:bg-blue-900 text-white rounded-2xl transition duration-300'>Login</Link>
+                                <Link onClick={() => { setShowLoginPage(true); closeMenu(); }} className='w-full text-center px-6 py-1.5 bg-black hover:bg-blue-900 text-white rounded-xl transition duration-300'>Login</Link>
                         }
                     </div>
                 )
