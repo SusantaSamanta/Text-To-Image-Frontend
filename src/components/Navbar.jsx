@@ -56,7 +56,7 @@ const Navbar = () => {
             setUserDetailFromBackend(false);
             setTimeout(() => navigate('/', { replace: true }), 0);
         } catch (error) {
-            alert('logout error')
+            toast.error('logout error')
         }
 
     };
