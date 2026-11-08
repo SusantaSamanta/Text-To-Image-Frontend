@@ -61,7 +61,7 @@ const Profile = () => {
 
   return (
     <div className='min-h-screen w-full bg-[url("../src/assets/home_bg.jpg")] bg-no-repeat bg-[0px_200px] bg-cover relative z-0'>
-      <div className='min-h-screen w-full bg-gradient-to-b from-white to-[#ffffff55] absolute top-0 left-0 z-[1]'></div>
+      <div className='min-h-full w-full bg-gradient-to-b from-white to-[#ffffff55] absolute top-0 left-0 z-[1]'></div>
 
       <div className='relative z-[2] pt-20 md:pt-24 pb-10 px-4 md:px-8 lg:px-32'>
         <div className='max-w-6xl mx-auto flex flex-col gap-6 md:gap-8'>

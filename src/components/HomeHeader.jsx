@@ -11,6 +11,7 @@ const HomeHeader = () => {
                 initial={{ opacity: 0, y: 40 }}
                 transition={{ duration: .8 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
             >
                 <div className='border-0 px-2 flex flex-col justify-center items-center md:gap-y-2 text-center text-3xl md:text-5xl font-semibold' >
                     <h1>Generate <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#5662d3] via-pink-500 to-orange-300'>Images</span></h1>
